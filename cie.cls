@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \newcommand\@camb{Lorem Ipsum}
-\ProvidesClass{cie}[LaTeX class for {\@camb} style exam papers.]
+\ProvidesClass{cie}[LaTeX class for Cambridge style exam papers.]
 
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
@@ -14,12 +14,19 @@
 \RequirePackage{tabularx}
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
+\RequirePackage{totcount}
+\RequirePackage{scrextend}
 
 \LoadClass[a4paper,10pt]{article}
 
 \RequirePackage[left=2cm, right=2cm, top=2cm, bottom=2cm, a4paper]{geometry}
 
+\RequirePackage[hidelinks]{hyperref}
+
 \renewcommand{\familydefault}{\sfdefault}
+
+\newtotcounter{questions}
+\newtotcounter{marks}
 
 \def\maker#1{
   \gdef\@maker{#1}
@@ -76,7 +83,7 @@
 \newcommand\candidatenamebox{
   \tikz[scale=1]{
     \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NAME}};
-    \draw (2.5cm, 0) rectangle (\textwidth, \@candidateboxheight);
+    \draw (2.5cm, 0) rectangle (\linewidth, \@candidateboxheight);
   }
 }
 \newcommand\centernumberbox{
@@ -125,7 +132,7 @@
   Candidate answers on this paper.
 }
 \additionmaterials{
-  No Additional Materials are required.
+  No Additional materials are required.
 }
 \writinginstructions{
   Write your \textbf{centre number, candidate number and name} on \textbf{all} the work you hand in. \\
@@ -139,7 +146,7 @@
   You may lose marks if you do not show your working or if you do not use appropriate units. \\
 }
 \copyright{
-  CC-BY-SA 4
+  Copyright \@camb
 }
 \centerlogo{
   \LaTeX
@@ -153,7 +160,7 @@
 \newcommand\coverpage{
   % Logo & testing institution
   \noindent \tikz[scale=1,every node/.style={inner sep=0,outer sep=0}]{
-    \path[draw=none, use as bounding box] (0,0) rectangle (\textwidth, 2cm);
+    \path[draw=none, use as bounding box] (0,0) rectangle (\linewidth, 2cm);
     \filldraw[color=black] (0,0) node[above right=0.1cm and 0, text width=2.0cm, color=white, align=center]
       {\fitlogoline{\@maker} \@program}
       rectangle (2cm,2cm);
@@ -164,7 +171,7 @@
 
   {
     \renewcommand*{\arraystretch}{1.3}
-    \noindent \begin{tabularx}{\textwidth}{@{}l X r@{}}
+    \noindent \begin{tabularx}{\linewidth}{@{}l X r@{}}
       \hline \rule{0pt}{4ex}\textbf{\@subject} & & \textbf{\@syllabus/\@component} \\
       \@componentfull & & \textbf{\@season} \\
       & & \textbf{\@timelimit} \\
@@ -178,11 +185,12 @@
   \@testinginstructions
   At the end of the examination, fasten all your work securely together. \\
   The number of marks is given in brackets [\hspace{1em}] at the end of each question or part question. \\
+  There are \total{questions} questions, and the maximium mark you can get is \total{marks}. \\
 
   \vfill
   \noindent\centerline {This paper contains \pageref{LastPage} pages.} \\
-  \rule{\textwidth}{0.4pt} \\
-  \begin{tabularx}{\textwidth}[t]{@{}X c X@{}}
+  \rule{\linewidth}{0.4pt} \\
+  \begin{tabularx}{\linewidth}[t]{@{}X c X@{}}
     \@copyright & \@centerlogo & \\
   \end{tabularx}
 
@@ -191,4 +199,72 @@
   \pagestyle{fancy}
   \renewcommand{\headrulewidth}{0pt}
   \cfoot{Page \thepage{} of \pageref{LastPage}}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{\baselineskip}
+  \setcounter{section}{0}
+  \setcounter{questions}{0}
+}
+
+\newif\ifinquestion
+\inquestionfalse
+\newcounter{submarks}
+\newcounter{subq}
+
+\newcommand\@questionmargin{1cm}
+
+\newcommand\printtotalmark{
+  \unless\ifinquestion
+    \ClassError{cie}{This must be called in question.}
+  \fi
+  \rule{\linewidth}{0.4pt}
+  Total mark for question \thequestions: \textbf{\thesubmarks}, all questions total to \themarks{} at this point.
+}
+
+\newcommand\point[1]{
+  \addtocounter{submarks}{#1}
+  \addtocounter{marks}{#1}
+  \hfill{} [#1]
+}
+
+\newcounter{subquestions}
+
+\newcommand\subquestion{
+  \refstepcounter{subquestions}\label{q\thequestions{}s\thesubquestions}
+  \textbf{\alph{subquestions}} \hspace{0.3cm}
+}
+
+\newenvironment{question}{
+  \setcounter{submarks}{0}
+  \setcounter{subquestions}{0}
+  \ifinquestion
+    \ClassError{cie}{Nested question is not supported. Use \\subquestion instead.}
+  \fi
+  \inquestiontrue
+  \refstepcounter{questions}\label{q\thequestions}
+  \begin{addmargin}[\@questionmargin]{\@questionmargin}
+  \hspace*{-\@questionmargin}\textbf{\thequestions}\hspace{0.5cm}\noindent%
+}{
+  \end{addmargin}
+  \inquestionfalse
+  \vspace{1cm}
+}
+
+\newcommand\blankpage{
+  \clearpage
+  \centerline{\textbf{BLANK PAGE}}
+}
+
+\newcommand\finalstuff{
+  \vfill \rule{\linewidth}{0.8pt} \small Permission to reproduce items where third-party
+  owned material protected by copyright is included has been sought and cleared
+  where possible. Every reasonable effort has been made by the publisher
+  (\@maker) to trace copyright holders, but if any items requiring clearance
+  have unwittingly been included, the publisher will be pleased to make amends
+  at the earliest possible opportunity.
+}
+
+\renewcommand\section[2]{
+  \refstepcounter{section}\label{sec\thesection}
+  \centerline{\textbf{Section \Alph{section}}}
+  \centerline{#2}
 }

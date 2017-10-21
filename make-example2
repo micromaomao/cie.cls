@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-name=example
+name=example2
 latexmk -pdf $name.tex
 excode=$?
 if [ $excode -eq 0 ]; then

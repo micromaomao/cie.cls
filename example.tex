@@ -1,17 +1,57 @@
 \documentclass{cie}
+\usepackage{lipsum}
 \begin{document}
-  \candidateinfoboxes{
-    \noindent \candidatenamebox \vspace{1mm} \\
-    \noindent \candidateclassbox
+  \candidateinfoboxes{}
+  \additionmaterials{
+    Additional materials: CIE Answer Sheet
   }
+  \answeron{}
   \writinginstructions{
     Write your \textbf{name and class} on \textbf{all} the work you hand in. \\
     Write in \textbf{pen or pencil}, but not lighter than HB. \\
     Although the use of staples, paper clips, glue or correction fluid won't cause issues, we advise against using them in exams. \\
+    Leave a blank line between each questions. \\
   }
   \testinginstructions{
-    Answer \textbf{all} questions. \\
+    Answer question \ref{qsa} and \textbf{either} question \ref{qsb1} or question \ref{qsb2}. \\
   }
   \coverpage
-  test
+
+  \section{}{
+    Answer question \ref{qsa}
+  }
+
+  \begin{question}
+    \label{qsa}
+    \lipsum[2-3]
+
+    \subquestion Define the term ``Sed diam''. \point{2}
+
+    \subquestion Describe two example of consequat lorem. \point{4}
+
+    \subquestion Explain why Vestibulum luctus nibh at lectus diam. \point{8}
+
+    \subquestion Assess the view `Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+      per inceptos hymenaeos.'. \point{12}
+
+    \printtotalmark
+  \end{question}
+
+  \section{}{
+    Answer either question \ref{qsb1} or \ref{qsb2}.
+  }
+
+  \begin{question}
+    \label{qsb1}
+    Explain and assess the view ``there is no one who loves pain itself, who seeks after it and wants to
+    have it, simply because it is pain.'' \point{25}
+  \end{question}
+
+  \begin{question}
+    \label{qsb2}
+    Explain and assess the view ``Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+    consectetur, adipisci velit.'' \point{25}
+  \end{question}
+
+  \finalstuff
 \end{document}
