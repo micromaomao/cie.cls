@@ -27,6 +27,9 @@
 \def\program#1{
   \gdef\@program{#1}
 }
+\def\candidateinfoboxes#1{
+  \gdef\@candidateinfoboxes{#1}
+}
 \def\makerfull#1{
   \gdef\@makerfull{#1}
 }
@@ -48,8 +51,8 @@
 \def\componentfull#1{
   \gdef\@componentfull{#1}
 }
-\def\time#1{
-  \gdef\@time{#1}
+\def\timelimit#1{
+  \gdef\@timelimit{#1}
 }
 \def\answeron#1{
   \gdef\@answeron{#1}
@@ -66,8 +69,35 @@
 \def\copyright#1{
   \gdef\@copyright{#1}
 }
-\def\logo#1{
-  \gdef\@logo{#1}
+\def\centerlogo#1{
+  \gdef\@centerlogo{#1}
+}
+
+\newcommand\candidatenamebox{
+  \tikz[scale=1]{
+    \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NAME}};
+    \draw (2.5cm, 0) rectangle (\textwidth, \@candidateboxheight);
+  }
+}
+\newcommand\centernumberbox{
+  \tikz[scale=1]{
+    \@candidateboxlabel{\mbox{CENTER} \mbox{NUMBER}};
+    \draw (2.5cm, 0) rectangle ++ (5cm, \@candidateboxheight);
+    \draw (3.5cm, 0) foreach \x in {1,...,4} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
+  }
+}
+\newcommand\candidatenumberbox{
+  \tikz[scale=1]{
+    \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NUMBER}};
+    \draw (2.5cm, 0) rectangle ++ (4cm, \@candidateboxheight);
+    \draw (3.5cm, 0) foreach \x in {1,...,3} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
+  }
+}
+\newcommand\candidateclassbox{
+  \tikz[scale=1]{
+    \@candidateboxlabel{\mbox{CLASS}};
+    \draw (2.5cm, 0) rectangle ++ (5cm, \@candidateboxheight);
+  }
 }
 
 \def\@logotwidth{1.8cm}
@@ -81,12 +111,16 @@
 \program{\fitlogoline{\small International} \fitlogoline{\textbf{AS \& A Level}}}
 \makerfull{{\@camb} International Examinations}
 \programfull{{\@camb} International Advanced Subsidiary and Advanced Level}
+\candidateinfoboxes{
+  \noindent \candidatenamebox \vspace{1mm} \\
+  \noindent \centernumberbox \hfill \candidatenumberbox
+}
 \subject{EXAMPLE SUBJECT}
 \syllabus{0000}
 \season{\today{}}
 \component{00}
 \componentfull{Example paper}
-\time{As long as you want}
+\timelimit{As long as you want}
 \answeron{
   Candidate answers on this paper.
 }
@@ -96,7 +130,8 @@
 \writinginstructions{
   Write your \textbf{centre number, candidate number and name} on \textbf{all} the work you hand in. \\
   Write in \textbf{pen or pencil}, but not lighter than HB. \\
-  Do \textbf{not} use staples, paper clips, glue or correction fluid. \\
+  Do \textbf{not} use staples, paper clips, glue or correction fluid. \\\\
+  \textbf{DO NOT WRITE IN ANY BARCODES.} \\
 }
 \testinginstructions{
   Answer \textbf{all} questions. \\
@@ -106,7 +141,7 @@
 \copyright{
   CC-BY-SA 4
 }
-\logo{
+\centerlogo{
   \LaTeX
 }
 
@@ -125,35 +160,20 @@
     \path[draw=none] (2cm, 2cm) -- (2cm, 0cm)
       node[right=0.5cm, pos=0.5, color=black, align=left] {\textbf{\@makerfull} \\ \@programfull};
   } \vspace{3mm} \\
-  \noindent \tikz[scale=1]{
-    \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NAME}};
-    \draw (2.5cm, 0) rectangle (\textwidth, \@candidateboxheight);
-  } \vspace{1mm} \\
-  \noindent \tikz[scale=1]{
-    \@candidateboxlabel{\mbox{CENTER} \mbox{NUMBER}};
-    \draw (2.5cm, 0) rectangle ++ (5cm, \@candidateboxheight);
-    \draw (3.5cm, 0) foreach \x in {1,...,4} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
-  } \hfill
-  \tikz[scale=1]{
-    \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NUMBER}};
-    \draw (2.5cm, 0) rectangle ++ (4cm, \@candidateboxheight);
-    \draw (3.5cm, 0) foreach \x in {1,...,3} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
-  } \vspace{3mm}
+  \@candidateinfoboxes \vspace{3mm}
 
   {
     \renewcommand*{\arraystretch}{1.3}
     \noindent \begin{tabularx}{\textwidth}{@{}l X r@{}}
       \hline \rule{0pt}{4ex}\textbf{\@subject} & & \textbf{\@syllabus/\@component} \\
       \@componentfull & & \textbf{\@season} \\
-      & & \textbf{\@time} \\
+      & & \textbf{\@timelimit} \\
       \@answeron \\
       \@additionmaterials \vspace{0.3cm} \\ \hline
     \end{tabularx}
   } \vspace{0.3cm} \\
   \textbf{Some reminders:} \\\\
   \@writinginstructions
-  \\
-  \textbf{DO NOT WRITE IN ANY BARCODES.} \\
   \\
   \@testinginstructions
   At the end of the examination, fasten all your work securely together. \\
@@ -163,7 +183,7 @@
   \noindent\centerline {This paper contains \pageref{LastPage} pages.} \\
   \rule{\textwidth}{0.4pt} \\
   \begin{tabularx}{\textwidth}[t]{@{}X c X@{}}
-    \@copyright & \@logo & \\
+    \@copyright & \@centerlogo & \\
   \end{tabularx}
 
   \thispagestyle{empty}
