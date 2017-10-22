@@ -205,6 +205,11 @@
   \setcounter{questions}{0}
 }
 
+\newcommand\@quelle[1]{{%
+      \unskip\nobreak\hfil\penalty50
+      \hskip2em\hbox{}\nobreak\hfil #1%
+      \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
 \newif\ifinquestion
 \inquestionfalse
 \newcounter{submarks}
@@ -223,7 +228,7 @@
 \newcommand\point[1]{
   \addtocounter{submarks}{#1}
   \addtocounter{marks}{#1}
-  \hfill{} [#1]
+  \@quelle{[#1]}
 }
 
 \newcounter{subquestions}
