@@ -16,6 +16,8 @@
 \RequirePackage{lastpage}
 \RequirePackage{totcount}
 \RequirePackage{scrextend}
+\RequirePackage{dashrule}
+\RequirePackage{pgffor}
 
 \LoadClass[a4paper,10pt]{article}
 
@@ -252,6 +254,16 @@
   \end{addmargin}
   \inquestionfalse
   \vspace{1cm}
+}
+
+\newcommand\singlewritingline{
+  .\leaders\hbox{.}\hfill \hfil
+}
+\newcommand\writinglinestillvfill{
+  \xleaders\vbox{\vspace{1.2em}\singlewritingline}\vfill \vfil
+}
+\newcommand*\writinglinesfor[1]{
+  \vbox to #1{\leaders\vbox{\vspace{1.2em}\singlewritingline}\vfill \vfil}
 }
 
 \newcommand\blankpage{
