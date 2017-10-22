@@ -18,6 +18,8 @@
 \RequirePackage{scrextend}
 \RequirePackage{dashrule}
 \RequirePackage{pgffor}
+\RequirePackage{changepage}
+\strictpagecheck
 
 \LoadClass[a4paper,10pt]{article}
 
@@ -200,6 +202,7 @@
   \newpage
   \pagestyle{fancy}
   \renewcommand{\headrulewidth}{0pt}
+  \chead{\textbf{\thepage}}
   \cfoot{Page \thepage{} of \pageref{LastPage}}
   \setlength{\parindent}{0pt}
   \setlength{\parskip}{\baselineskip}
@@ -272,6 +275,11 @@
 }
 
 \newcommand\finalstuff{
+  \checkoddpage
+  \unless\ifoddpage
+    \blankpage
+  \fi
+  \blankpage
   \vfill \rule{\linewidth}{0.8pt} \small Permission to reproduce items where third-party
   owned material protected by copyright is included has been sought and cleared
   where possible. Every reasonable effort has been made by the publisher
