@@ -3,12 +3,15 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{ccicons}
+\usepackage{commath}
 \begin{document}
+  \printanswer
   \copyright{Mao Wtm \ccbysa}
-  \subject{MATHEMATICS (FUNNIER)}
-  \syllabus{2333}
-  \component{13}
-  \componentfull{Paper 1: Pure Mathematics}
+  \subject{MATHEMATICS}
+  \syllabus{9709}
+  \component{43}
+  \componentfull{Paper 4: Also Pure Mathematics}
+  \season{October/November 2017}
   \coverpage
 
   \begin{question}
@@ -16,24 +19,49 @@
 
     \subquestion Prove $-8 = 10$. \point{2}
     \writinglinesfor{5cm}
+    \markschemecontent{
+      \award{1} for attempts at rotation, e.g: $-18 = 0$ \\
+      \award{1} for complete and correct proof.
+
+      Rotate both side \SI{90}{\degree} counter-clockwise: $-18 = 0$ \\
+      Divide both side by 1: $-8 = \frac{0}{1}$ \\
+      In right hand side, dividing by 1 is the same as multiply by 1: $-8 = 10$
+    }
 
     \subquestion Hence prove $\frac{1}{0} = \infty$. \point{2}
     \writinglinestillvfill
+    \markschemecontent{
+      \award{1} for attempts at multiplying both side by $-1$: $8 = -10$ \\
+      \award{1} for complete and correct proof: Rotate both side \SI{90}{\degree} clock-wise: $\infty = \frac{1}{0}$
+    }
+
     \printtotalmark
-    \newpage
+    \ifnotmarkscheme \newpage \fi
   \end{question}
 
   \begin{question}
     \subquestion Prove the identity ``$\text{opinion} - \pi = \text{onion}$''. \point{1} 
     \writinglinesfor{3cm}
+    \markschemecontent{
+      Rewrite $\pi$ as $\text{pi}$, and removing $\text{pi}$ from $\text{o\textbf{pi}nion}$ gives $\text{onion}$.
+    }
 
-    \subquestion Prove the identity $\frac{7}{s} = 0 \mod 2$. \point{2}
+    \subquestion Prove the identity $\frac{7}{s} = 0 \mod 2$. \point{3}
     \writinglinesfor{6cm}
+    \markschemecontent{
+      \award{1} for rewriting $7$ as $seven$. Do \textbf{not} award the mark if the candidate wrote seven in a sans-serif font. \\
+      \award{1} for dividing $s$ from $seven$, giving $even$. \\
+      \award{1} stating that $even$ implies $0 \mod 2$.
+    }
 
-    \subquestion Explain why obtuse triangles are always sad. \point{2}
+    \subquestion Explain why obtuse triangles are always sad. \point{1}
     \writinglinestillvfill
+    \markschemecontent{
+      Because it is never right.
+    }
+
     \printtotalmark
-    \newpage
+    \ifnotmarkscheme \newpage \fi
   \end{question}
 
   \begin{question}
@@ -43,12 +71,22 @@
       \cos^4 \left (2 \theta + \frac{1}{2} \sqrt{ \sin \left (\frac{\theta}{2} \right ) } \right )$$
 
     \writinglinestillvfill
-    \newpage
+    \markschemecontent{
+      \award{3} for correct proof.
+    }
+    \ifnotmarkscheme \newpage \fi
 
     \subquestion Hence solve $\frac{1}{8} \left (4 \cos \left (4 \theta + \sqrt{ \sin \left (\frac{\theta}{2} \right ) } \right ) + \cos \left (8 \theta + 2 \sqrt{ \sin \left (\frac{\theta}{2} \right ) } \right ) + 3 \right )
       = \tan \theta$
       for $0 < x < 2\pi$. \point{3}
     \writinglinesfor{8cm}
+    \markschemecontent{
+      Solutions are $\theta \approx 0.2807$ and $\theta \approx 3.3216$.
+
+      \award{1} for attempting to use change-of-sign with $\cos^4 \left (2 \theta + \frac{1}{2} \sqrt{ \sin \left (\frac{\theta}{2} \right ) } \right ) - \tan \theta = 0$ \\
+      \award{1} for one correct solution. \\
+      \award{1} for another correct solution.
+    }
 
     \printtotalmark
   \end{question}
@@ -58,15 +96,28 @@
 
     \subquestion Show that John has 2 apple left. \point{1}
     \writinglinesfor{2cm}
+    \markschemecontent{
+      \award{1} for correct application of subtraction.
+    }
 
-    \subquestion Hence calculation the mass of the Sun. \point{3}
+    \subquestion Hence calculate the mass of the Sun. \point{3}
     \writinglinestillvfill
-    \newpage
+    \ifnotmarkscheme \newpage \fi
+    \markschemecontent{
+      \award{1} for attempting to calculate mass from volume (\SI{1.412e27}{m^3}) and average density (\SI{1408}{kg/m^3}).
+      \award{1} for correct answer and \award{1} for correct unit: \SI{1.988e30}{kg}
+    }
 
     It is given that $\SI{1000}{gram} = \SI{1}{kilogram}$.
 
     \subquestion Write 1 instagram in \SI{}{gram}. \point{1}
     \writinglinesfor{3cm}
+    \markschemecontent{
+      $$\int \SI{1}{instagram} \dif t$$
+
+      Comment: Since instagrams are a snapshot of grams at a specific point in time, to convert grams to instagrams you simply need to take the derivative.
+      To convert instagrams back into grams you use instagration. See \url{https://www.reddit.com/r/shittyaskscience/comments/1dicsm/whats_the_conversion_formula_for_grams_to/}
+    }
 
     \printtotalmark
   \end{question}
