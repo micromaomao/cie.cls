@@ -1,6 +1,13 @@
 \documentclass{cie}
 \usepackage{lipsum}
+\usepackage{ccicons}
 \begin{document}
+  \printanswer
+  \copyright{Mao Wtm \ccbysa}
+  \subject{SOCIOLOGY}
+  \syllabus{9699}
+  \component{13}
+  \componentfull{Paper 1: Lorem Ipsum}
   \candidateinfoboxes{}
   \additionmaterials{
     Additional materials: CIE Answer Sheet
@@ -18,40 +25,139 @@
   \coverpage
 
   \section{}{
-    Answer question \ref{qsa}
+    \ifmarkscheme Candidates should a\else A\fi nswer question \ref{qsa}
   }
 
   \begin{question}
     \label{qsa}
-    \lipsum[2-3]
-
+    \ifnotmarkscheme \lipsum[2-3] \par \fi
     \subquestion Define the term ``Sed diam''. \point{2}
+    \markschemecontent{
+      \award{1} for a partial definition of ``Sed diam''. \\
+      \award{1} for a full definition of ``Sed diam''.
+
+      An example on its own which do not aid the definition should not be awarded the mark.
+    }
 
     \subquestion Describe two example of consequat lorem. \point{4}
+    \markschemecontent{
+      \award{1} for identifying one example, and \award{1} for the explaination. \\
+      Another \award{1} for identifying another example, and \award{1} for the explaination.
+
+      Development can be either by a description of the consequat lorem or the effects of
+      consequat lorem.
+    }
 
     \subquestion Explain why Vestibulum luctus nibh at lectus diam. \point{8}
+    \markschemecontent{
+      \award{0}-\award{4}: Answers at this level are likely to show only limited
+      appreciation of the issues raised in the question. 
+
+      Lower in the level \award{1}–\award{2}, a simple answer with no development. 
+
+      Higher in the level \award{3}–\award{4}, a few limited observations, but with little
+      depth in the explanations offered and the answer may rely on description rather
+      than explanation. Answers which implicitly link to research or methods may
+      reach the top of the level. 
+
+      \award{5}-\award{8}: Answers at this level show some sociological knowledge and
+      understanding of the question. At this level there is likely to be some
+      accurate use of studies, concepts, contemporary examples, or some explicit
+      discussion of the issue in question.
+
+      Lower in the level \award{5}–\award{6}, a simplistic description is expected.
+
+      Higher in the level \award{7}–\award{8}, a more detailed account of some
+      different reasons for why Vestibulum luctus nibh at lectus diam.
+
+      Place at the top of the level according to depth and/or range of examples
+      explained and supported with theory, empirical data or concepts.
+
+      A good list of undeveloped points may gain up to 6 marks. To go higher there
+      needs to be some development of three or more points or detailed development of
+      two or more points.
+
+      This question asks candidates to ‘explain’ therefore there is no requirement
+      for assessment.
+    }
 
     \subquestion Assess the view `Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-      per inceptos hymenaeos.'. \point{12}
+      per inceptos hymenaeos.'. \point{11}
+
+    \markschemecontent{
+      \award{0}-\award{4}: Answers at this level are likely to show only limited
+      appreciation of the issues raised in the question. 
+
+      Lower in the level \award{1}–\award{2}, a simple answer with no development. 
+
+      Higher in the level \award{3}–\award{4}, a few limited observations, but with little
+      depth in the explanations offered and the answer may rely on description rather
+      than explanation. Answers which implicitly link to research or methods may
+      reach the top of the level. 
+
+      \award{5}-\award{8}: Answers at this level show some sociological knowledge and
+      understanding of the question. At this level there is likely to be some
+      accurate use of studies, concepts, contemporary examples, or some explicit
+      discussion of the issue in question.
+
+      Lower in the level \award{5}–\award{6}, one or two simplistic descriptions
+      (e.g. of consumption/subservience compared to either that of the functionalist
+      or the feminist views). Answers are likely to be supported with brief
+      references to studies. Higher in the level \award{7}–\award{8}, a more detailed
+      account supported with more detailed references to studies (e.g. Lorem
+      ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit,
+      vestibulum ut, placerat ac, adipiscing vitae, felis.)
+
+      Place at the top of the level according to depth and/or range of examples
+      explained and supported with theory, empirical data or concepts.
+
+      Answers in this level should address both sides of the debate but a one-sided
+      answer that is done very well, could also gain up to 8 marks.
+
+      \award{9}-\award{11}: Answers at this level must achieve three things: 
+
+      \begin{itemize}
+        \item [\textbf{First},] there will be good sociological knowledge and understanding.  
+
+        \item [\textbf{Second},] the material used will be interpreted accurately and applied
+        effectively to answering the question. 
+
+        \item [\textbf{Third},] there must also be some evidence of assessment.
+      \end{itemize}
+
+      Lower in the level \award{9}–\award{10}, the assessment may be based on a
+      simple juxtaposition of different views of how Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Alternatively
+      answers may be confined to just one or two explicitly evaluative points. At the
+      top of the level \award{11}, the taciti sociosqu view that sociosqu ad litora
+      torquent per conubia nostrawill be evaluated explicitly and in some depth
+      and/or with wider range of explicitly evaluative points.  The taciti sociosqu
+      view will be explored, probably through a discussion of key concepts. This
+      should be evaluated directly, mostly likely through clear and explicit
+      understanding of aspects of the taciti sociosqu view that sociosqu ad litora
+      torquent per conubia nostrawill, but at this level it may be through comparison
+      with other revalent theories. 
+    }
 
     \printtotalmark
   \end{question}
 
   \section{}{
-    Answer either question \ref{qsb1} or \ref{qsb2}.
+    \ifmarkscheme Candidates should a\else A\fi nswer either question \ref{qsb1} or \ref{qsb2}.
   }
 
   \begin{question}
     \label{qsb1}
     Explain and assess the view ``there is no one who loves pain itself, who seeks after it and wants to
-    have it, simply because it is pain.'' \point{25}
+    have it, simply because it is pain.'' \pointnoadd{25}
   \end{question}
 
   \begin{question}
     \label{qsb2}
     Explain and assess the view ``Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-    consectetur, adipisci velit.'' \point{25}
+    consectetur, adipisci velit.'' \pointnoadd{25}
   \end{question}
 
+  \addtopapermark{25}
   \finalstuff
 \end{document}

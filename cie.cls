@@ -275,7 +275,13 @@
 \newcommand\point[1]{
   \addtocounter{submarks}{#1}
   \addtocounter{marks}{#1}
+  \pointnoadd{#1}
+}
+\newcommand\pointnoadd[1]{
   \@quelle{[#1]}
+}
+\newcommand\addtopapermark[1]{
+  \addtocounter{marks}{#1}
 }
 \newcommand\award[1]{\textbf{#1}'}
 
