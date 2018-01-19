@@ -287,9 +287,9 @@
 
 \newcounter{subquestions}
 
-\newcommand\subquestion{
-  \refstepcounter{subquestions}\label{q\thequestions{}s\thesubquestions}
-  \textbf{\alph{subquestions}} \hspace{0.3cm}
+\newcommand\subquestion{%
+  \refstepcounter{subquestions}\label{q\thequestions{}s\thesubquestions}%
+  \textbf{\alph{subquestions}} \hspace{0.3cm}%
 }
 
 \newenvironment{question}{
@@ -300,8 +300,9 @@
   \fi
   \inquestiontrue
   \refstepcounter{questions}\label{q\thequestions}
-  \begin{addmargin}[\@questionmargin]{\@questionmargin}
-  \hspace*{-\@questionmargin}\textbf{\thequestions}\hspace{0.5cm}\noindent%
+  \begin{addmargin}[\@questionmargin]{\@questionmargin}%
+  \makebox[0pt][r]{\textbf{\thequestions}\hspace{0.5cm}}%
+  \noindent%
 }{
   \end{addmargin}
   \inquestionfalse
