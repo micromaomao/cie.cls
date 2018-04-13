@@ -87,31 +87,31 @@
   \gdef\@centerlogo{#1}
 }
 
-\newcommand\candidatenamebox{
+\newcommand\candidatenamebox{%
   \tikz[scale=1]{
     \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NAME}};
     \draw (2.5cm, 0) rectangle (\linewidth, \@candidateboxheight);
-  }
+  }%
 }
-\newcommand\centernumberbox{
+\newcommand\centernumberbox{%
   \tikz[scale=1]{
     \@candidateboxlabel{\mbox{CENTER} \mbox{NUMBER}};
     \draw (2.5cm, 0) rectangle ++ (5cm, \@candidateboxheight);
     \draw (3.5cm, 0) foreach \x in {1,...,4} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
-  }
+  }%
 }
-\newcommand\candidatenumberbox{
+\newcommand\candidatenumberbox{%
   \tikz[scale=1]{
     \@candidateboxlabel{\mbox{CANDIDATE} \mbox{NUMBER}};
     \draw (2.5cm, 0) rectangle ++ (4cm, \@candidateboxheight);
     \draw (3.5cm, 0) foreach \x in {1,...,3} { -- ++ (0, \@candidateboxheight) ++ (1cm, -\@candidateboxheight) }
-  }
+  }%
 }
-\newcommand\candidateclassbox{
+\newcommand\candidateclassbox{%
   \tikz[scale=1]{
     \@candidateboxlabel{\mbox{CLASS}};
     \draw (2.5cm, 0) rectangle ++ (5cm, \@candidateboxheight);
-  }
+  }%
 }
 
 \def\@logotwidth{1.8cm}
@@ -125,9 +125,9 @@
 \program{\fitlogoline{\small International} \fitlogoline{\textbf{AS \& A Level}}}
 \makerfull{{\@camb} International Examinations}
 \programfull{{\@camb} International Advanced Subsidiary and Advanced Level}
-\candidateinfoboxes{
-  \noindent \candidatenamebox \vspace{1mm} \\
-  \noindent \centernumberbox \hfill \candidatenumberbox
+\candidateinfoboxes{%
+  \noindent \candidatenamebox \vspace{1mm} \\%
+  \noindent \centernumberbox \hfill \candidatenumberbox%
 }
 \subject{EXAMPLE SUBJECT}
 \syllabus{0000}
@@ -288,6 +288,7 @@
 \newcounter{subquestions}
 
 \newcommand\subquestion{%
+  \ifmarkscheme \ifthenelse{\value{subquestions}>0}{\vspace{-0.5\parskip}\noindent\rule{\linewidth}{.2pt}\vspace{0.5\parskip}}{} \fi%
   \refstepcounter{subquestions}\label{q\thequestions{}s\thesubquestions}%
   \textbf{\alph{subquestions}} \hspace{0.3cm}%
 }
@@ -307,6 +308,7 @@
   \end{addmargin}
   \inquestionfalse
   \vspace{1cm}
+  \filbreak
 }
 
 \newcommand\singlewritingline{
@@ -333,7 +335,7 @@
     \fi
     \blankpage
   }
-  \vfill \rule{\linewidth}{0.8pt} \small Permission to reproduce items where third-party
+  \ifnotmarkscheme \vfill \rule{\linewidth}{0.8pt} \fi \small Permission to reproduce items where third-party
   owned material protected by copyright is included has been sought and cleared
   where possible. Every reasonable effort has been made by the publisher
   (\@maker) to trace copyright holders, but if any items requiring clearance
