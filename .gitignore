@@ -222,3 +222,5 @@ TSWLatexianTemp*
 
 example.pdf
 example*.pdf
+
+*.aux_*
