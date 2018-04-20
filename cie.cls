@@ -35,6 +35,14 @@
 \newtotcounter{marks}
 \newtotcounter{emptypages}
 
+\newbox\hchoicemeasurebox
+\def\aux@ciecls@fname{\jobname.aux_ciecls}
+\newread\aux@ciecls@stream
+\openin\aux@ciecls@stream=\aux@ciecls@fname\relax
+\ifeof\aux@ciecls@stream \message{\aux@ciecls@fname\ does not exist.} \else \closein\aux@ciecls@stream \input \aux@ciecls@fname \message{Inputed \aux@ciecls@fname} \fi
+\newwrite\aux@ciecls
+\openout\aux@ciecls=\aux@ciecls@fname
+
 \def\maker#1{
   \gdef\@maker{#1}
 }
@@ -293,21 +301,39 @@
   \textbf{\alph{subquestions}} \hspace{0.3cm}%
 }
 
+\newif\ifnexthchoicelinebreak
+
 \newenvironment{question}{
-  \setcounter{submarks}{0}
-  \setcounter{subquestions}{0}
-  \ifinquestion
-    \ClassError{cie}{Nested question is not supported. Use \\subquestion instead.}
-  \fi
-  \inquestiontrue
-  \refstepcounter{questions}\label{q\thequestions}
+  \setcounter{submarks}{0}%
+  \setcounter{subquestions}{0}%
+  \ifinquestion%
+    \ClassError{cie}{Nested question is not supported. Use \\subquestion instead.}%
+  \fi%
+  \inquestiontrue%
+  \refstepcounter{questions}\label{q\thequestions}%
   \begin{addmargin}[\@questionmargin]{\@questionmargin}%
   \makebox[0pt][r]{\textbf{\thequestions}\hspace{0.5cm}}%
+  \gdef\mcqcurrentanswer{N}%
+  \gdef\mcqcurrentcorrectanswer{N}%
+  \setbox\hchoicemeasurebox=\hbox{}%
+  \edef\@bname{hchoiceq\thequestions vertical}%
+  \ifcsname if\@bname\endcsname \else \provideboolean{\@bname}\fi%
+  \nexthchoicelinebreakfalse%
   \noindent%
-}{
+}{%
+  \edef\@bname{hchoiceq\thequestions vertical}
+  \ifthenelse{\wd\hchoicemeasurebox>\linewidth}{%
+  \edef\wr@act{\write\aux@ciecls{\string\provideboolean{\@bname}\string\setboolean{\@bname}{true}}}%
+  \wr@act%
+  }{}%
+  \ifthenelse{\boolean{markscheme} \AND \not \equal{\mcqcurrentcorrectanswer}{N}}{
+
+    \textbf{Answer: }\mcqcurrentcorrectanswer
+
+  }{}
   \end{addmargin}
   \inquestionfalse
-  \vspace{1cm}
+  \vspace{0.33cm}
   \filbreak
 }
 
@@ -341,10 +367,29 @@
   (\@maker) to trace copyright holders, but if any items requiring clearance
   have unwittingly been included, the publisher will be pleased to make amends
   at the earliest possible opportunity.
+  \closeout\aux@ciecls
 }
 
 \renewcommand\section[2]{
   \refstepcounter{section}\label{sec\thesection}
   \centerline{\textbf{Section \Alph{section}}}
   \centerline{#2}
+}
+
+\newbox\hchoicescratch
+
+\newcommand\hchoice[2]{%
+  \setbox\hchoicescratch=\hbox{\textbf{#1}\nobreak\hspace{0.3cm}\nobreak#2\hspace{1cm}}%
+  \ifthenelse{\boolean{hchoiceq\thequestions vertical}}{%
+    \ifthenelse{\boolean{nexthchoicelinebreak}}{\\}{}\unhcopy\hchoicescratch\nexthchoicelinebreaktrue%
+  }{%
+    \unhcopy\hchoicescratch%
+  }%
+  \gdef\mcqcurrentanswer{#1}%
+  \setbox\hchoicemeasurebox=\hbox{\copy\hchoicemeasurebox \unhcopy\hchoicescratch}%
+}
+\newcommand\setanswer{%
+  \xdef\mcqcurrentcorrectanswer{\mcqcurrentanswer}%
+  \addtocounter{submarks}{1}%
+  \addtocounter{marks}{1}%
 }
